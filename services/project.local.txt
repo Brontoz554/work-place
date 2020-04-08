@@ -1,0 +1,29 @@
+server {
+	listen *:80;
+	listen [::]:80;
+	server_name laravel;
+
+	access_log /var/log/nginx/access.log;
+	error_log /var/log/nginx/er.log;
+
+	index index.php;
+
+
+	charset utf-8;
+
+	location / {
+		proxy_pass http://localhost:8080;
+		proxy_set_header Host $host;
+		proxy_set_header X-Real-IP $remote_addr;
+		proxy_set_header X-Forwarded-For $remote_addr;
+		proxy_connect_timeout 120;
+		proxy_send_timeout 120;
+		proxy_read_timeout 180;
+	}
+
+	location ~* \.(jpg|jpeg|gif|png|ico|css|bmp|swf|js|html|txt)$ {
+		root /var/www/services/public;
+
+	}
+
+}

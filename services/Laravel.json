@@ -1,0 +1,23 @@
+{
+	"applications": 
+	{
+		"services": 
+		{
+			"type": "php",
+			"user": "www-data",
+			"group": "www-data",
+			"script": "index.php",
+			"root": "/var/www/services/public",
+			"index": "index.php"
+		}
+	},
+
+	"listeners": 
+	{
+		"*:8080": 
+		{
+			"pass": "applications/services"
+		}
+	}	
+
+}
